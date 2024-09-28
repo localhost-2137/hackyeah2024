@@ -1,6 +1,8 @@
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
-import { MdBusiness, MdPeople, MdPushPin, MdSearch} from "react-icons/md";
+import {MdBusiness, MdPeople, MdPushPin, MdSearch} from "react-icons/md";
 import {Separator} from "@/components/ui/separator";
+import AiSuspense from "@/components/aiSuspense";
+import CompanyFaq from "@/app/company/[name]/companyFaq";
 
 interface ICompany {
     name: string,
@@ -9,6 +11,11 @@ interface ICompany {
     location: string,
     industry: string,
     employee: number,
+}
+
+export interface IFaq {
+    question: string,
+    answer?: string,
 }
 
 export default function CompanyPage({params}: { params: { name: string } }) {
@@ -26,6 +33,21 @@ export default function CompanyPage({params}: { params: { name: string } }) {
         employee: 1500,
         industry: "Information Technology",
     }
+
+    const faqs: IFaq[] = [
+        {
+            question: "Is it accessible?",
+            answer: "Yes. It adheres to the WAI-ARIA design pattern."
+        },
+        {
+            question: "Is it secure?",
+            answer: "Yes. It uses the latest security protocols."
+        },
+        {
+            question: "Is it reliable?",
+            answer: "Yes. It has a 99.9% uptime guarantee."
+        },
+    ]
 
     // const company = await getCompanyByName(companyName)
 
@@ -60,6 +82,12 @@ export default function CompanyPage({params}: { params: { name: string } }) {
                 <CardContent className="py-6">
                     <h3 className="text-2xl font-semibold py-2">O Firmie</h3>
                     <p>{company.desc}</p>
+                </CardContent>
+                <Separator/>
+                <CardContent className="py-6">
+                    <AiSuspense>
+                        <CompanyFaq companyName={company.name} faqs={faqs}/>
+                    </AiSuspense>
                 </CardContent>
             </Card>
         </main>
