@@ -7,12 +7,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserType {
+  FREELANCER
+  BUSINESS
+  NGO
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
   emailVerified DateTime?
+  isFulfilled  Boolean   @default(false)
+  type          UserType?
+  tags          String[] @default([])
   image         String?
+  description   String?
   password      String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
