@@ -1,0 +1,67 @@
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
+import { MdBusiness, MdPeople, MdPushPin, MdSearch} from "react-icons/md";
+import {Separator} from "@/components/ui/separator";
+
+interface ICompany {
+    name: string,
+    desc: string,
+    type: "corporation" | "voluntary organization" | "small/medium businesses",
+    location: string,
+    industry: string,
+    employee: number,
+}
+
+export default function CompanyPage({params}: { params: { name: string } }) {
+
+    const companyName = params.name
+
+    const company: ICompany = {
+        name: "Google",
+        desc: "Google is a global technology leader focused on improving the ways people connect with information. " +
+            "With a mission to organize the world's information and make it universally accessible and useful, " +
+            "Google offers a wide range of products and services, including search, advertising, cloud computing, " +
+            "software, and hardware.",
+        type: "corporation",
+        location: "UK, london",
+        employee: 1500,
+        industry: "Information Technology",
+    }
+
+    // const company = await getCompanyByName(companyName)
+
+    return (
+        <main className="w-[80%] max-w-[1400px] mx-auto p-10">
+            <Card className="p-5">
+                <CardHeader>
+                    <CardTitle className="text-4xl">{company.name}</CardTitle>
+                </CardHeader>
+                <Separator/>
+                <CardContent className="py-6">
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="flex gap-4 items-center">
+                            <div className="bg-blue-200 p-2 rounded-xl"><MdPushPin/></div>
+                            <p>Lokalizacja: {company.location}</p>
+                        </div>
+                        <div className="flex gap-4 items-center">
+                            <div className="bg-blue-200 p-2 rounded-xl"><MdBusiness/></div>
+                            <p>Typ organizacji: {company.type}</p>
+                        </div>
+                        <div className="flex gap-4 items-center">
+                            <div className="bg-blue-200 p-2 rounded-xl"><MdPeople/></div>
+                            <p>Ilość pracowników: {company.employee}+</p>
+                        </div>
+                        <div className="flex gap-4 items-center">
+                            <div className="bg-blue-200 p-2 rounded-xl"><MdSearch/></div>
+                            <p>Przemysł: {company.industry}</p>
+                        </div>
+                    </div>
+                </CardContent>
+                <Separator/>
+                <CardContent className="py-6">
+                    <h3 className="text-2xl font-semibold py-2">O Firmie</h3>
+                    <p>{company.desc}</p>
+                </CardContent>
+            </Card>
+        </main>
+    )
+}
