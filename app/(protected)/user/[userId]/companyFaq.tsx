@@ -1,5 +1,5 @@
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
-import {IFaq} from "@/app/company/[name]/page";
+import {IFaq} from "@/app/(protected)/user/[userId]/page";
 
 interface ICompanyFaq {
     companyName: string
