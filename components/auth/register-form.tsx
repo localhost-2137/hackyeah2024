@@ -62,12 +62,12 @@ export const RegisterForm = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Imię i nazwisko</FormLabel>
+                    <FormLabel>Imię i nazwisko lub nazwa organizacji</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
                         disabled={isPending}
-                        placeholder="Jan Kowalski"
+                        placeholder="Nazwa"
                       />
                     </FormControl>
                     <FormMessage />
