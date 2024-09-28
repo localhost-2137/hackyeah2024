@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { SiFreelancer } from "react-icons/si";
 import { IoIosBusiness } from "react-icons/io";
 import { FaBuildingNgo } from "react-icons/fa6";
@@ -8,6 +8,7 @@ import { getUser } from "@/actions/user-data";
 import { Input } from "../ui/input";
 import { encodeBase64 } from "bcryptjs";
 import MultipleSelector, { Option } from "../ui/multiple-selector";
+import { fulfillUserData } from "@/actions/fulfill-user-data";
 
 type UserType = "FREELANCER" | "BUSINESS" | "NGO";
 
@@ -27,6 +28,7 @@ export default function FulFillUserDataForm() {
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3 | 4>(1);
   const [description, setDescription] = useState<string>("Pusty opis");
   const [imageBase64, setImageBase64] = useState<string>("");
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     getUser().then((data) => {
@@ -62,6 +64,21 @@ export default function FulFillUserDataForm() {
     }
   };
 
+  const onSubmit = async () => {
+    startTransition(() => {
+      const data: UserDataToBeFulfilled = {
+        name,
+        description,
+        type: role!,
+        image: imageBase64,
+        tags: tags.map((tag) => tag.value),
+      };
+      fulfillUserData(data).then((res) => {
+        
+      });
+    });
+  }
+
   return (
     <div className="w-1/4 h-2/3 flex flex-col items-center justify-between rounded-xl border bg-card text-card-foreground shadow p-16">
       <h2 className="text-2xl text-center font-semibold">
@@ -83,7 +100,7 @@ export default function FulFillUserDataForm() {
         />
       )}
       {currentStep !== 1 && description !== "" && (
-        <Controls setCurrentStep={setCurrentStep} currentStep={currentStep} />
+        <Controls setCurrentStep={setCurrentStep} currentStep={currentStep} onSubmit={onSubmit} />
       )}
     </div>
   );
@@ -162,9 +179,11 @@ function NameAndTageChoosing({
 function Controls({
   setCurrentStep,
   currentStep,
+  onSubmit,
 }: {
   setCurrentStep: (step: any) => void;
   currentStep: 1 | 2 | 3 | 4;
+  onSubmit: () => void;
 }) {
   return (
     <div className="flex flex-row w-full gap-2">
@@ -182,6 +201,14 @@ function Controls({
           className={`w-full h-12 rounded-xl border bg-card text-card-foreground shadow  hover:translate-y-1 hover:shadow-none hover:text-rose-600 transition-all duration-300`}
         >
           Dalej
+        </button>
+      )}
+      {currentStep === 4 && (
+        <button
+          onClick={onSubmit}
+          className={`w-full h-12 rounded-xl border bg-card text-card-foreground shadow  hover:translate-y-1 hover:shadow-none hover:text-rose-600 transition-all duration-300`}
+        >
+          Zapisz
         </button>
       )}
     </div>
