@@ -3,19 +3,25 @@
 import {db} from "@/lib/db";
 import {UserType} from "@/actions/fulfill-user-data";
 
-export function getUserList(take: number, skip: number, userType: UserType | UserType[]) {
-    const type = Array.isArray(userType) ? userType : [userType];
+export async function getUserList(take: number, skip: number, userType?: UserType) {    
+    const type = userType ? [userType] : [];
+    const whereParams: any = {
+        isFulfilled: true,
+        emailVerified: {
+            not: null
+        },
+    };
+    if (type.length > 0) {
+        whereParams['type'] = {
+            in: type
+        };
+    }
+    console.log(whereParams);
 
-    return db.user.findMany({
+    const users = await db.user.findMany({
         take,
         skip,
-        where: {
-            type: {in: type},
-            isFulfilled: true,
-            emailVerified: {
-                not: null
-            },
-        },
+        where: whereParams,
         select: {
             id: true,
             email: true,
@@ -27,4 +33,6 @@ export function getUserList(take: number, skip: number, userType: UserType | Use
             createdAt: true,
         }
     });
+    console.log(users);
+    return users;   
 }
