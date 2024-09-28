@@ -18,7 +18,7 @@ export default async function CompanyFaq(props: ICompanyFaq) {
 
     return (
         <div className="flex flex-col gap-4">
-            <h3 className="text-2xl">FAQ</h3>
+            <h3 className="text-2xl font-semibold">FAQ</h3>
             <Accordion type="single">
                 {faqs.map((faq, index) => {
                     return (

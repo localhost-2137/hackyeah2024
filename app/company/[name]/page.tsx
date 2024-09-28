@@ -3,6 +3,7 @@ import {MdBusiness, MdPeople, MdPushPin, MdSearch} from "react-icons/md";
 import {Separator} from "@/components/ui/separator";
 import AiSuspense from "@/components/aiSuspense";
 import CompanyFaq from "@/app/company/[name]/companyFaq";
+import {getPublicUserData} from "@/actions/user-data";
 
 interface ICompany {
     name: string,
@@ -18,7 +19,8 @@ export interface IFaq {
     answer?: string,
 }
 
-export default function CompanyPage({params}: { params: { name: string } }) {
+export default async function CompanyPage({params}: { params: { name: string } }) {
+    console.log(await getPublicUserData("cm1ml26a50000fik9xwd3w4cx"))
 
     const companyName = params.name
 
