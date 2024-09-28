@@ -24,6 +24,7 @@ const SettingsPage = async () => {
         <main className="p-10">
             <Card className="max-w-[1400px] mx-auto p-5">
                 <CardHeader className="flex flex-row justify-between items-center">
+
                     <h1 className="text-2xl font-semibold">Profile Settings</h1>
                     <UserButton/>
                 </CardHeader>
