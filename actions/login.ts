@@ -38,7 +38,7 @@ export const login = async (
       verificationToken.token,
     );
 
-    return { success: "Confirmation email sent!" };
+    return { success: "Musisz zweryfikować konto! Sprawdź skrzynkę email!" };
   }
 
   try {
