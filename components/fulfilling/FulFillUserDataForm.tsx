@@ -7,6 +7,7 @@ import { FaBuildingNgo } from "react-icons/fa6";
 import { getUser } from "@/actions/user-data";
 import { Input } from "../ui/input";
 import { encodeBase64 } from "bcryptjs";
+import MultipleSelector, { Option } from "../ui/multiple-selector";
 
 type UserType = "FREELANCER" | "BUSINESS" | "NGO";
 
@@ -22,7 +23,7 @@ export default function FulFillUserDataForm() {
   const [user, setUser] = useState<any>();
   const [role, setRole] = useState<UserType>();
   const [name, setName] = useState<string>(user ? user.name : "");
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<Option[]>([]);
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3 | 4>(1);
   const [description, setDescription] = useState<string>("Pusty opis");
   const [imageBase64, setImageBase64] = useState<string>("");
@@ -32,6 +33,7 @@ export default function FulFillUserDataForm() {
       if (data) {
         setUser(data.data);
         setName(data.data.name);
+        setTags(data.data.tags.map((tag: string) => ({ label: tag, value: tag })));
       }
     });
   }, []);
@@ -48,7 +50,7 @@ export default function FulFillUserDataForm() {
       {currentStep === 1 ? (
         <RoleChoosing setRole={setRole} />
       ) : currentStep === 2 ? (
-        <NameAndTageChoosing name={name} setName={setName} />
+        <NameAndTageChoosing name={name} setName={setName} tags={tags} setTags={setTags} />
       ) : currentStep === 3 ? (
         <DescriptionChoosing
           description={description}
@@ -102,9 +104,13 @@ function RoleChoosing({ setRole }: { setRole: (role: UserType) => void }) {
 function NameAndTageChoosing({
   name,
   setName,
+  tags,
+  setTags,
 }: {
   name: string;
   setName: (name: string) => void;
+  tags: Option[];
+  setTags: (options: Option[]) => void;
 }) {
   return (
     <div className="flex flex-col gap-4 w-full">
@@ -116,6 +122,15 @@ function NameAndTageChoosing({
         }}
         defaultValue={name}
         type="input"
+      />
+       <MultipleSelector
+        defaultOptions={[]}
+        placeholder="Wpisz tagi..."
+        creatable
+        value={tags}
+        onChange={(tags) => {
+          setTags(tags);
+        }}
       />
     </div>
   );
