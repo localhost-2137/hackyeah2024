@@ -42,6 +42,26 @@ export default function FulFillUserDataForm() {
     setCurrentStep(2);
   }, [setCurrentStep, role]);
 
+  const convertToBase64 = (file: any) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const handleImageChange = async (event: any) => {
+    const file = event.target.files[0];
+    if (file && file.size / 1024 / 1024 < 2) {
+      // Check if file size is less than 2MB
+      const base64 = await convertToBase64(file);
+      setImageBase64(base64 as string);
+    } else {
+      alert("Image size must be 2MB or less");
+    }
+  };
+
   return (
     <div className="w-1/4 h-2/3 flex flex-col items-center justify-between rounded-xl border bg-card text-card-foreground shadow p-16">
       <h2 className="text-2xl text-center font-semibold">
@@ -57,7 +77,10 @@ export default function FulFillUserDataForm() {
           setDescription={setDescription}
         />
       ) : (
-        <AvatarChoosing image={imageBase64} setImage={setImageBase64} />
+        <AvatarChoosing
+          image={imageBase64}
+          handleImageChange={handleImageChange}
+        />
       )}
       {currentStep !== 1 && description !== "" && (
         <Controls setCurrentStep={setCurrentStep} currentStep={currentStep} />
@@ -189,30 +212,22 @@ function DescriptionChoosing({
 
 function AvatarChoosing({
   image,
-  setImage,
+  handleImageChange,
 }: {
   image: string;
-  setImage: (image: string) => void;
+  handleImageChange: (event: any) => void;
 }) {
   return (
-    <div className="flex flex-col gap-4 w-full">
+    <div className="flex flex-col items-center justify-center gap-4 w-full">
       <h2 className="text-lg font-semibold">Dodaj zdjęcie</h2>
       <Input
         placeholder="Zdjęcie"
         onChange={(e) => {
-        //   const file = e.target.files[0];
-        //   const reader = new FileReader();
-        //   reader.onloadend = () => {
-        //     setImage(reader.result as string);
-        //   };
-        //   reader.readAsDataURL(file);
+          handleImageChange(e);
         }}
         type="file"
       />
-      <img
-        src={`data:image/png;base64, ${image}`}
-        className="w-full rounded-full"
-      />
+      <img src={image} className="w-[200px] h-[200px] rounded-full" />
     </div>
   );
 }
