@@ -16,7 +16,6 @@ export async function getUserList(take: number, skip: number, userType?: UserTyp
             in: type
         };
     }
-    console.log(whereParams);
 
     const users = await db.user.findMany({
         take,
@@ -33,6 +32,5 @@ export async function getUserList(take: number, skip: number, userType?: UserTyp
             createdAt: true,
         }
     });
-    console.log(users);
-    return users;   
+    return users;
 }
