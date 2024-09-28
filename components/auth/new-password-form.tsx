@@ -51,47 +51,44 @@ export const NewPasswordForm = () => {
   };
 
   return (
-    <CardWrapper
-      headerLabel="Enter a new password"
-      backButtonLabel="Back to login"
-      backButtonHref="/auth/login"
-    >
-      <Form {...form}>
-        <form 
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6"
-        >
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="******"
-                      type="password"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <FormError message={error} />
-          <FormSuccess message={success} />
-          <Button
-            disabled={isPending}
-            type="submit"
-            className="w-full"
+    <div className="w-3/4 h-2/3 rounded-xl border bg-card text-card-foreground shadow">
+      <div className="flex flex-row-reverse w-full h-full">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8 w-1/3 flex flex-col p-16 border-l-2 justify-center items-center"
           >
-            Reset password
-          </Button>
-        </form>
-      </Form>
-    </CardWrapper>
+            <h2 className="text-3xl font-bold tracking-wider mb-16">
+              RESETUJ HASŁO
+            </h2>
+            <div className="space-y-4 w-full">
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Hasło</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="******"
+                        type="password"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <FormError message={error} />
+            <FormSuccess message={success} />
+            <Button disabled={isPending} type="submit" className="w-full">
+              Resetuj hasło
+            </Button>
+          </form>
+        </Form>
+      </div>
+    </div>
   );
 };
