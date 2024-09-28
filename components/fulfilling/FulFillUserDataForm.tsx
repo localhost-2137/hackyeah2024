@@ -6,9 +6,10 @@ import { IoIosBusiness } from "react-icons/io";
 import { FaBuildingNgo } from "react-icons/fa6";
 import { getUser } from "@/actions/user-data";
 import { Input } from "../ui/input";
-import { encodeBase64 } from "bcryptjs";
 import MultipleSelector, { Option } from "../ui/multiple-selector";
 import { fulfillUserData } from "@/actions/fulfill-user-data";
+import { useRouter } from "next/navigation";
+import { DotLoader } from "react-spinners";
 
 type UserType = "FREELANCER" | "BUSINESS" | "NGO";
 
@@ -30,12 +31,19 @@ export default function FulFillUserDataForm() {
   const [imageBase64, setImageBase64] = useState<string>("");
   const [isPending, startTransition] = useTransition();
 
+  const Router = useRouter();
+
   useEffect(() => {
     getUser().then((data) => {
       if (data) {
+        if (data.data.isFulfilled) {
+          Router.push("/settings");
+        }
         setUser(data.data);
         setName(data.data.name);
-        setTags(data.data.tags.map((tag: string) => ({ label: tag, value: tag })));
+        setTags(
+          data.data.tags.map((tag: string) => ({ label: tag, value: tag }))
+        );
       }
     });
   }, []);
@@ -73,11 +81,15 @@ export default function FulFillUserDataForm() {
         image: imageBase64,
         tags: tags.map((tag) => tag.value),
       };
-      fulfillUserData(data).then((res) => {
-        
+      fulfillUserData(data).then((data) => {
+        if (data?.error) {
+          alert(data.error);
+        } else {
+          Router.push("/settings");
+        }
       });
     });
-  }
+  };
 
   return (
     <div className="w-1/4 h-2/3 flex flex-col items-center justify-between rounded-xl border bg-card text-card-foreground shadow p-16">
@@ -87,7 +99,12 @@ export default function FulFillUserDataForm() {
       {currentStep === 1 ? (
         <RoleChoosing setRole={setRole} />
       ) : currentStep === 2 ? (
-        <NameAndTageChoosing name={name} setName={setName} tags={tags} setTags={setTags} />
+        <NameAndTageChoosing
+          name={name}
+          setName={setName}
+          tags={tags}
+          setTags={setTags}
+        />
       ) : currentStep === 3 ? (
         <DescriptionChoosing
           description={description}
@@ -100,7 +117,12 @@ export default function FulFillUserDataForm() {
         />
       )}
       {currentStep !== 1 && description !== "" && (
-        <Controls setCurrentStep={setCurrentStep} currentStep={currentStep} onSubmit={onSubmit} />
+        <Controls
+          setCurrentStep={setCurrentStep}
+          currentStep={currentStep}
+          onSubmit={onSubmit}
+          isPending={isPending}
+        />
       )}
     </div>
   );
@@ -163,7 +185,7 @@ function NameAndTageChoosing({
         defaultValue={name}
         type="input"
       />
-       <MultipleSelector
+      <MultipleSelector
         defaultOptions={[]}
         placeholder="Wpisz tagi..."
         creatable
@@ -180,14 +202,16 @@ function Controls({
   setCurrentStep,
   currentStep,
   onSubmit,
+  isPending,
 }: {
   setCurrentStep: (step: any) => void;
   currentStep: 1 | 2 | 3 | 4;
   onSubmit: () => void;
+  isPending: boolean;
 }) {
   return (
     <div className="flex flex-row w-full gap-2">
-      {currentStep !== 1 && (
+      {currentStep !== 1 && !isPending && (
         <button
           onClick={() => setCurrentStep((prev: any) => prev - 1)}
           className={`w-full h-12 rounded-xl border bg-card text-card-foreground shadow hover:translate-y-1 hover:shadow-none hover:text-rose-600 transition-all duration-300`}
@@ -195,7 +219,7 @@ function Controls({
           Wstecz
         </button>
       )}
-      {currentStep !== 4 && (
+      {currentStep !== 4 && !isPending && (
         <button
           onClick={() => setCurrentStep((prev: any) => prev + 1)}
           className={`w-full h-12 rounded-xl border bg-card text-card-foreground shadow  hover:translate-y-1 hover:shadow-none hover:text-rose-600 transition-all duration-300`}
@@ -203,12 +227,20 @@ function Controls({
           Dalej
         </button>
       )}
-      {currentStep === 4 && (
+      {currentStep === 4 && !isPending && (
         <button
           onClick={onSubmit}
           className={`w-full h-12 rounded-xl border bg-card text-card-foreground shadow  hover:translate-y-1 hover:shadow-none hover:text-rose-600 transition-all duration-300`}
         >
           Zapisz
+        </button>
+      )}
+      {isPending && (
+        <button
+          onClick={onSubmit}
+          className={`w-full h-12 flex items-center justify-center rounded-xl border bg-card text-card-foreground shadow  hover:translate-y-1 hover:shadow-none hover:text-rose-600 transition-all duration-300`}
+        >
+          <DotLoader color="#000" size={20} />
         </button>
       )}
     </div>
