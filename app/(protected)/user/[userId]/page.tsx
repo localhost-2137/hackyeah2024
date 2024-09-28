@@ -67,12 +67,12 @@ export default async function CompanyPage({params}: { params: { userId: string }
                 <CardContent className="py-6">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="flex gap-4 items-center">
-                            <div className="bg-blue-200 p-2 rounded-xl"><MdMail/></div>
+                            <div className="bg-red-700 text-white p-2 rounded-xl"><MdMail/></div>
                             <p>Email: {data.email}</p>
                         </div>
                         <div className="flex gap-4 items-center">
-                            <div className="bg-blue-200 p-2 rounded-xl"><MdBusiness/></div>
-                            <p>Typ organizacji: {data.type ? data.type : "Brak określonego typu"}</p>
+                            <div className="bg-red-700 text-white p-2 rounded-xl"><MdBusiness/></div>
+                            <p>Typ organizacji: {data.type ? data.type.toLowerCase() : "Brak określonego typu"}</p>
                         </div>
                     </div>
                 </CardContent>
@@ -83,7 +83,7 @@ export default async function CompanyPage({params}: { params: { userId: string }
                         <div className="grid grid-cols-2 gap-4">
                             {data.tags.map((tag, index) => (
                                 <Badge key={index}
-                                       className="bg-blue-200 text-black hover:bg-blue-200 p-2 rounded-xl">{tag}</Badge>
+                                       className="bg-red-700 text-white hover:bg-red-700 p-2 rounded-xl">{tag}</Badge>
                             ))}
                         </div>
                     </CardContent>
