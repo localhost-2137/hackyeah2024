@@ -30,3 +30,25 @@ export async function getUser() {
 
     return {data: userData};
 }
+
+export async function getPublicUserData(userId: string) {
+    const userData = await db.user.findUnique({
+        where: {id: userId},
+        select: {
+            id: true,
+            email: true,
+            name: true,
+            description: true,
+            type: true,
+            image: true,
+            tags: true,
+            updatedAt: true,
+            createdAt: true,
+        }
+    });
+    if (!userData) {
+        return {error: "User data not found!"};
+    }
+
+    return {data: userData};
+}
