@@ -22,7 +22,7 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ name, img, description, tags,
             duration: 0.5,
           },
         }}
-        className="w-[40%]"
+        className="flex-1"
       >
         <Card className="pt-6 hover:shadow-none transition-all hover:translate-y-1 hover:text-red-700 cursor-pointer duration-300">
           <CardContent className="flex items-center gap-4">
