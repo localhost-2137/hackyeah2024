@@ -33,8 +33,8 @@ const UserCard: React.FC<UserCardProps> = ({
       <Card className="pt-6 hover:shadow-none transition-all hover:translate-y-1 hover:text-red-700 cursor-pointer duration-300 h-full">
         <CardContent className="flex justify-between items-center gap-4">
           <img
-            src={img || ""}
-            alt={name || ""}
+            src={img ?? "https://placehold.co/100x100"}
+            alt={name ?? ""}
             className="rounded-full aspect-square w-24 h-24"
           />
           <div className="flex flex-col gap-2">

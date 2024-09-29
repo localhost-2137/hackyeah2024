@@ -7,10 +7,9 @@ import { FaBuildingNgo, FaUser } from "react-icons/fa6";
 import { getUser } from "@/actions/user-data";
 import { Input } from "../ui/input";
 import MultipleSelector, { Option } from "../ui/multiple-selector";
-import { fulfillUserData } from "@/actions/fulfill-user-data";
+import { fulfillUserData } from "@/actions/fulfillUserData2";
 import { useRouter } from "next/navigation";
 import { DotLoader } from "react-spinners";
-import { div } from "framer-motion/client";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 
 type UserType = "FREELANCER" | "BUSINESS" | "NGO";
@@ -291,7 +290,7 @@ export function AvatarChoosing({
         type="file"
       />
       <Avatar>
-        <AvatarImage src={image || ""} />
+        <AvatarImage className="h-[200px] w-[200px] rounded-full" src={image || ""} />
         <AvatarFallback className="bg-sky-500">
           <FaUser className="text-white" />
         </AvatarFallback>
