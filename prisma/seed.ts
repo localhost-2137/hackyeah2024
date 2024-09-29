@@ -13,7 +13,7 @@ const users = [
     isFulfilled: true,
     type: UserType.BUSINESS,
     tags: ["zrównoważony rozwój", "innowacja", "środowisko"],
-    image: "https://example.com/eko_innowatorzy_logo.png",
+    image: "https://placehold.co/100x100",
     description:
       "Firma dedykowana technologiom zrównoważonym oraz rozwiązaniom na rzecz ochrony środowiska.",
     password: hashedDummyPassword,
@@ -28,7 +28,7 @@ const users = [
     isFulfilled: true,
     type: UserType.NGO,
     tags: ["działania na rzecz klimatu", "ochrona środowiska", "edukacja"],
-    image: "https://example.com/zielona_przyszlosc_logo.png",
+    image: "https://placehold.co/100x100",
     description:
       "Organizacja non-profit działająca na rzecz walki ze zmianami klimatycznymi i ochrony zasobów naturalnych.",
     password: hashedDummyPassword,
@@ -43,7 +43,7 @@ const users = [
     isFulfilled: true,
     type: UserType.BUSINESS,
     tags: ["technologia", "innowacja", "wpływ społeczny"],
-    image: "https://example.com/technologia_dla_dobra_logo.png",
+    image: "https://placehold.co/100x100",
     description:
       "Firma technologiczna tworząca rozwiązania na rzecz postępu społecznego i korzyści dla społeczeństwa.",
     password: hashedDummyPassword,
@@ -58,7 +58,7 @@ const users = [
     isFulfilled: true,
     type: UserType.NGO,
     tags: ["prawa człowieka", "adwokatura", "sprawiedliwość"],
-    image: "https://example.com/opc_logo.png",
+    image: "https://placehold.co/100x100",
     description:
       "Międzynarodowa organizacja pozarządowa, która promuje i broni praw człowieka na całym świecie.",
     password: hashedDummyPassword,
@@ -73,7 +73,7 @@ const users = [
     isFulfilled: true,
     type: UserType.BUSINESS,
     tags: ["energia", "zrównoważony rozwój", "odnawialne źródła energii"],
-    image: "https://example.com/czysta_energia_logo.png",
+    image: "https://placehold.co/100x100",
     description:
       "Lider w dziedzinie rozwiązań z zakresu energii odnawialnej, oferujący alternatywy dla paliw kopalnych.",
     password: hashedDummyPassword,
@@ -92,7 +92,7 @@ const users = [
       "bezpieczeństwo żywnościowe",
       "organizacja non-profit",
     ],
-    image: "https://example.com/sojusz_glod_logo.png",
+    image: "https://placehold.co/100x100",
     description:
       "Globalna organizacja non-profit, której misją jest walka z głodem i zapewnianie bezpieczeństwa żywnościowego.",
     password: hashedDummyPassword,
@@ -107,7 +107,7 @@ const users = [
     isFulfilled: true,
     type: UserType.BUSINESS,
     tags: ["innowacja", "technologia", "biznes"],
-    image: "https://example.com/innowacyjne_rozwiazania_logo.png",
+    image: "https://placehold.co/100x100",
     description:
       "Firma technologiczna skupiająca się na tworzeniu innowacyjnych rozwiązań dla wyzwań biznesowych.",
     password: hashedDummyPassword,
@@ -122,7 +122,7 @@ const users = [
     isFulfilled: true,
     type: UserType.NGO,
     tags: ["ochrona zdrowia", "non-profit", "społeczność"],
-    image: "https://example.com/zdrowie_dla_wszystkich_logo.png",
+    image: "https://placehold.co/100x100",
     description:
       "Organizacja pozarządowa, która działa na rzecz zapewnienia dostępu do usług medycznych w regionach niedostatecznie rozwiniętych.",
     password: hashedDummyPassword,
@@ -137,7 +137,7 @@ const users = [
     isFulfilled: true,
     type: UserType.BUSINESS,
     tags: ["zrównoważony rozwój", "redukcja odpadów", "innowacja"],
-    image: "https://example.com/rgobiezamkniety_logo.png",
+    image: "https://placehold.co/100x100",
     description:
       "Firma oferująca zrównoważone rozwiązania w zakresie gospodarki obiegu zamkniętego.",
     password: hashedDummyPassword,
@@ -152,7 +152,7 @@ const users = [
     isFulfilled: true,
     type: UserType.NGO,
     tags: ["edukacja", "non-profit", "rozwój społeczności"],
-    image: "https://example.com/global_edu_fund_logo.png",
+    image: "https://placehold.co/100x100",
     description:
       "Organizacja pozarządowa, której celem jest zapewnienie zasobów edukacyjnych dla społeczności z ograniczonym dostępem do edukacji.",
     password: hashedDummyPassword,

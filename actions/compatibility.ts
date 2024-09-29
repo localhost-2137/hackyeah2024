@@ -36,7 +36,7 @@ export default async function partnershipCompatibility(potentialPartnerId: strin
     if (!userData || !potentialPartnerData) {
         return {error: "User data not found!"};
     }
-    
+
     const compatibilityData = await generateAiCompatibility(userData, potentialPartnerData);
     return {data: compatibilityData};
 }
@@ -45,8 +45,8 @@ async function generateAiCompatibility(userData: any, potentialPartnerData: any)
     const model = gemini.getGenerativeModel({model: "gemini-1.0-pro-latest"});
 
     const promptTemplate = `The institution ${userData.name} is a ${userData.type} institution with the following description
-        \`\`\`${userData.description}\`\`\`. The institution ${potentialPartnerData.name} is a ${potentialPartnerData.type} institution with the following description
-        \`\`\`${potentialPartnerData.description}\`\`\`. Based on this information AND THE INTERNET ONLINE DATA, `;
+        \`\`\`${userData.description}\`\`\` and the following tags: \`${userData.tags.join(', ')}\`. The institution ${potentialPartnerData.name} is a ${potentialPartnerData.type} institution with the following description
+        \`\`\`${potentialPartnerData.description}\`\`\` and the following tags: \`${potentialPartnerData.tags.join(', ')}\`. Based on this information AND THE INTERNET ONLINE DATA, `;
 
     const descriptionResPrompt = `${promptTemplate}generate a compatibility description of the partnership between these two institutions. The response should be in Polish.`;
     const ratingResPrompt = `${promptTemplate}generate a compatibility rating of the partnership between these two institutions. The response should be just and ONLY a number 
