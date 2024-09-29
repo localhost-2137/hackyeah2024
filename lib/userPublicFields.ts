@@ -8,4 +8,5 @@ export const userPublicFields = {
     tags: true,
     updatedAt: true,
     createdAt: true,
+    faqQuestions: true,
 };
