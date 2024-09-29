@@ -1,3 +1,6 @@
+import { db } from "@/lib/db";
+import { UserType } from "@prisma/client";
+
 const hashedDummyPassword =
   "$2a$10$rApU36vyoahl1UpmTaDaX.Q8DNo2SMoPqviLqc4.kp3KP7.TFHS1K";
 
@@ -8,7 +11,7 @@ const users = [
     email: "kontakt@ekoinnowatorzy.com",
     emailVerified: new Date(),
     isFulfilled: true,
-    type: "Firma",
+    type: UserType.BUSINESS,
     tags: ["zrównoważony rozwój", "innowacja", "środowisko"],
     image: "https://example.com/eko_innowatorzy_logo.png",
     description:
@@ -23,7 +26,7 @@ const users = [
     email: "info@zielonaprzyszlosc.org",
     emailVerified: new Date(),
     isFulfilled: true,
-    type: "NGO",
+    type: UserType.NGO,
     tags: ["działania na rzecz klimatu", "ochrona środowiska", "edukacja"],
     image: "https://example.com/zielona_przyszlosc_logo.png",
     description:
@@ -38,7 +41,7 @@ const users = [
     email: "wsparcie@technologiadladobra.io",
     emailVerified: new Date(),
     isFulfilled: true,
-    type: "Firma",
+    type: UserType.BUSINESS,
     tags: ["technologia", "innowacja", "wpływ społeczny"],
     image: "https://example.com/technologia_dla_dobra_logo.png",
     description:
@@ -53,7 +56,7 @@ const users = [
     email: "kontakt@opc.org",
     emailVerified: new Date(),
     isFulfilled: true,
-    type: "NGO",
+    type: UserType.NGO,
     tags: ["prawa człowieka", "adwokatura", "sprawiedliwość"],
     image: "https://example.com/opc_logo.png",
     description:
@@ -68,7 +71,7 @@ const users = [
     email: "info@czystaenergia.com",
     emailVerified: new Date(),
     isFulfilled: true,
-    type: "Firma",
+    type: UserType.BUSINESS,
     tags: ["energia", "zrównoważony rozwój", "odnawialne źródła energii"],
     image: "https://example.com/czysta_energia_logo.png",
     description:
@@ -83,7 +86,7 @@ const users = [
     email: "kontakt@sojuszglod.org",
     emailVerified: new Date(),
     isFulfilled: true,
-    type: "NGO",
+    type: UserType.NGO,
     tags: [
       "pomoc głodującym",
       "bezpieczeństwo żywnościowe",
@@ -102,7 +105,7 @@ const users = [
     email: "wsparcie@innowacyjnerozwiazania.com",
     emailVerified: new Date(),
     isFulfilled: true,
-    type: "Firma",
+    type: UserType.BUSINESS,
     tags: ["innowacja", "technologia", "biznes"],
     image: "https://example.com/innowacyjne_rozwiazania_logo.png",
     description:
@@ -117,7 +120,7 @@ const users = [
     email: "info@zdrowiedlawszystkich.org",
     emailVerified: new Date(),
     isFulfilled: true,
-    type: "NGO",
+    type: UserType.NGO,
     tags: ["ochrona zdrowia", "non-profit", "społeczność"],
     image: "https://example.com/zdrowie_dla_wszystkich_logo.png",
     description:
@@ -132,7 +135,7 @@ const users = [
     email: "kontakt@rgobiezamkniety.com",
     emailVerified: new Date(),
     isFulfilled: true,
-    type: "Firma",
+    type: UserType.BUSINESS,
     tags: ["zrównoważony rozwój", "redukcja odpadów", "innowacja"],
     image: "https://example.com/rgobiezamkniety_logo.png",
     description:
@@ -147,7 +150,7 @@ const users = [
     email: "wsparcie@globaledu.org",
     emailVerified: new Date(),
     isFulfilled: true,
-    type: "NGO",
+    type: UserType.NGO,
     tags: ["edukacja", "non-profit", "rozwój społeczności"],
     image: "https://example.com/global_edu_fund_logo.png",
     description:
@@ -158,3 +161,18 @@ const users = [
   },
 ];
 
+export async function seedDb() {
+    for (const user of users) {
+        await db.user.upsert({
+            where: {
+                id: user.id,
+            },
+            update: user,
+            create: user,
+        });
+    }
+}
+
+seedDb().then(() => {
+    console.log("Database seeded successfully");
+});
