@@ -59,7 +59,6 @@ export const {
           token.isOAuth = !!existingAccount;
           token.name = existingUser.name;
           token.email = existingUser.email;
-
           return token;
         }
       },

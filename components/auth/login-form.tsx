@@ -47,7 +47,6 @@ export const LoginForm = () => {
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
-
     startTransition(() => {
       login(values, callbackUrl)
         .then((data) => {
@@ -61,7 +60,7 @@ export const LoginForm = () => {
             setSuccess(data.success);
           }
         })
-        .catch(() => setError("Something went wrong"));
+        .catch(() => setError("Coś poszło nie tak! Spróbuj ponownie"));
     });
   };
 
