@@ -1,7 +1,8 @@
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {Separator} from "@/components/ui/separator";
+import Link from "next/link";
 
-export default function ChatPage() {
+export default function ConversationsPage() {
 
     const conversations = [
         {
@@ -31,13 +32,15 @@ export default function ChatPage() {
                 <CardContent>
                     <div className="flex flex-col gap-4 py-4">
                         {conversations.map((conversation) => (
-                            <Card key={conversation.id}
-                                  className="cursor-pointer py-2 px-6 transition hover:shadow-none hover:text-red-700">
-                                <CardContent className="flex flex-col justify-center p-2">
-                                    <h3 className="text-xl font-semibold">{conversation.recipient}</h3>
-                                    <p className="text-gray-500">Ostatnia aktywność: {conversation.lastMessage}</p>
-                                </CardContent>
-                            </Card>
+                            <Link key={conversation.id} href={`/chat/${conversation.id}`}>
+                                <Card
+                                    className="cursor-pointer py-2 px-6 transition hover:shadow-none hover:text-red-700">
+                                    <CardContent className="flex flex-col justify-center p-2">
+                                        <h3 className="text-xl font-semibold">{conversation.recipient}</h3>
+                                        <p className="text-gray-500">Ostatnia aktywność: {conversation.lastMessage}</p>
+                                    </CardContent>
+                                </Card>
+                            </Link>
                         ))}
                     </div>
                 </CardContent>
