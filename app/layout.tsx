@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { auth } from '@/auth';
-import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,10 +22,6 @@ export default async function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           {children}
-          <Script
-            src="https://cdn.cubing.net/js/scramble-display"
-            type="module"
-          />
         </body>
       </html>
     </SessionProvider>
