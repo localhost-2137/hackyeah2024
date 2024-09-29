@@ -1,7 +1,6 @@
-import {Message} from "@/app/(protected)/chat/[chatId]/page";
 import {Card, CardContent} from "@/components/ui/card";
 
-export default function MoneyRequestMessage(props: { message: Message }) {
+export default function MoneyRequestMessage(props: Readonly<{ message: any }>) {
 
     const {message} = props
 

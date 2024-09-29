@@ -38,8 +38,6 @@ export const getLastMessages = async () => {
     },
   });
 
-  console.log(messages);
-
   const chats = messages.map((message) => ({
     id: user.id === message.senderId ? message.receiverId : message.senderId,
     recipient: user.id === message.senderId ? message.receiver.name : message.sender.name,

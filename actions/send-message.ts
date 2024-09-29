@@ -9,8 +9,6 @@ export async function sendMessage(data: any) {
     return { error: "User not found!" };
   }
 
-  console.log(data);
-
   await db.chatMessage.create({
     data: {
       sender: { connect: { id: user.id } },

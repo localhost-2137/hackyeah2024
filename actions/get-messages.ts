@@ -28,8 +28,6 @@ export const getMessages = async (receiverId: string) => {
         },
     });
 
-    console.log(messages);
-
     return {data: messages.map((message) => ({
         id: message.id,
         isYourMessage: message.senderId === user.id,
