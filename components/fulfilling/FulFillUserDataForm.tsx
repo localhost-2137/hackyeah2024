@@ -291,7 +291,7 @@ export function AvatarChoosing({
         type="file"
       />
       <Avatar>
-        <AvatarImage src={image || ""} />
+        <AvatarImage className="h-[200px] w-[200px] rounded-full" src={image || ""} />
         <AvatarFallback className="bg-sky-500">
           <FaUser className="text-white" />
         </AvatarFallback>

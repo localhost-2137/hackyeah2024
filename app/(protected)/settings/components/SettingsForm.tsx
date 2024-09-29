@@ -2,7 +2,7 @@
 
 import { getUser } from "@/actions/user-data";
 import { useEffect, useState, useTransition } from "react";
-import { Option } from "../../../../components/ui/multiple-selector";
+import { Option } from "@/components/ui/multiple-selector";
 import {
   AvatarChoosing,
   DescriptionChoosing,
