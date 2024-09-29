@@ -1,27 +1,11 @@
+import { getLastMessages } from "@/actions/last-messages";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {Separator} from "@/components/ui/separator";
 import Link from "next/link";
 
-export default function ConversationsPage() {
+export default async function ConversationsPage() {
 
-    const conversations = [
-        {
-            id: 1,
-            recipient: "Blachotrapez",
-            lastMessage: "Cześć, czy mogę zamówić 10 ton blachy?",
-        },
-        {
-            id: 2,
-            recipient: "EkoBuda",
-            lastMessage: "Witam, czy 10 000 pln wystarczy na realizacje?",
-        },
-        {
-            id: 3,
-            recipient: "Czysta Energia",
-            lastMessage: "Dziękujemy za wykonanie zlecenia",
-        }
-    ]
-
+    const chats = await getLastMessages(); 
     return (
         <main className="py-10">
             <Card className="max-w-[1400px] mx-auto px-4">
@@ -31,7 +15,7 @@ export default function ConversationsPage() {
                 <Separator/>
                 <CardContent>
                     <div className="flex flex-col gap-4 py-4">
-                        {conversations.map((conversation) => (
+                        {chats.map((conversation) => (
                             <Link key={conversation.id} href={`/chat/${conversation.id}`}>
                                 <Card
                                     className="cursor-pointer py-2 px-6 transition hover:shadow-none hover:text-red-700">
