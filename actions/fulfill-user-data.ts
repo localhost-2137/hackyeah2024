@@ -5,6 +5,7 @@ import {currentUser} from "@/lib/auth";
 import {ElasticIndexes, elasticSearch} from "@/lib/elasticSearch";
 import {userPublicFields} from "@/lib/userPublicFields";
 import {gemini} from "@/lib/gemini";
+import {getOppositeType} from "@/lib/userUtils";
 
 export type UserType = 'FREELANCER' | 'BUSINESS' | 'NGO';
 const MIN_FAQ_QUESTION_COUNT = 7;
@@ -62,17 +63,6 @@ export async function fulfillUserData(data: UserDataToBeFulfilled) {
         id: user.id,
         document: newUserData,
     });
-}
-
-function getOppositeType(type: UserType): UserType {
-    switch (type) {
-        case "BUSINESS":
-            return "NGO";
-        case "NGO":
-            return "BUSINESS";
-        case "FREELANCER":
-            return "BUSINESS";
-    }
 }
 
 export async function generateFaqQuestions(name: string, description: string, type: UserType, recursionCount = 0): Promise<string[]> {
