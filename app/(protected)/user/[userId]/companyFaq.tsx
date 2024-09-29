@@ -27,7 +27,7 @@ export default function CompanyFaq({faqQuestions}: Readonly<{ faqQuestions: IFaq
                                             <div className="flex items-center space-x-2">
                                                 <LottieAnimation animationData={animationData} loop={true}
                                                                  autoplay={true} size={2}/>
-                                                <p>AI generating...</p>
+                                                <p>Oczekiwanie na odpowiedź sztucznej inteligencji...</p>
                                             </div>
                                         )}>
                                             <FaqAnswer questionId={faqQuestion.id} />
