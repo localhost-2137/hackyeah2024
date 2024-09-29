@@ -41,13 +41,13 @@ export const UserButton = () => {
                 <Link href="/settings">
                     <DropdownMenuItem>
                         <MdPeople className="h-4 w-4 mr-2"/>
-                        Profile
+                        Profil
                     </DropdownMenuItem>
                 </Link>
                 <LogoutButton>
                     <DropdownMenuItem>
                         <ExitIcon className="h-4 w-4 mr-2"/>
-                        Logout
+                        Wyloguj
                     </DropdownMenuItem>
                 </LogoutButton>
             </DropdownMenuContent>

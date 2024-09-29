@@ -9,6 +9,10 @@ export default function Header() {
                 <h1 className="text-4xl font-semibold">
                     <Link href="/application">TrustLink</Link>
                 </h1>
+                <div className="flex flex-row gap-4 font-semibold">
+                    <Link href="/application">Wyszukiwarka</Link>
+                    <Link href="/chat">Czat</Link>
+                </div>
                 <UserButton/>
             </div>
         </header>
