@@ -48,10 +48,8 @@ export async function getUserList(take: number, skip: number, userType?: UserTyp
             .filter((id) => typeof id === "string");
 
     } catch (error: any) {
-        // if statusCode is not 404, throw the error
-        if (!error?.meta || error.meta.statusCode !== 404) {
-            throw error;
-        }
+        console.error("Error fetching recommended users");
+        console.warn("We're not using ElasticSearch to fetch recommended users");
     }
 
     return db.$queryRaw`
@@ -68,4 +66,4 @@ export async function getUserList(take: number, skip: number, userType?: UserTyp
         "id" ASC
       LIMIT ${take} OFFSET ${skip}
     `;
-};
+}
