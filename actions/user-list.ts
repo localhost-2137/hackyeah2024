@@ -8,9 +8,13 @@ import { currentUser } from "@/lib/auth";
 export async function getUserList(
   take: number,
   skip: number,
-  userType?: UserType
+  userType?: UserType | UserType[]
 ) {
-  const type = userType ? [userType] : [UserType.BUSINESS, UserType.NGO, UserType.FREELANCER];
+  const type = userType
+    ? Array.isArray(userType)
+      ? userType
+      : [userType]
+    : ["FREELANCER", "BUSINESS", "NGO"];
   const user = await currentUser();
 
   const recommendedUsersPromise = elasticSearch.search({
@@ -18,7 +22,7 @@ export async function getUserList(
     query: {
       bool: {
         must: {
-            terms: { type },
+          terms: { type },
         },
         filter: {
           term: {

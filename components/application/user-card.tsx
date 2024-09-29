@@ -28,9 +28,9 @@ const UserCard: React.FC<UserCardProps> = ({
           duration: 0.5,
         },
       }}
-      className="w-[40%]"
+      className="w-full !h-full"
     >
-      <Card className="pt-6 hover:shadow-none transition-all hover:translate-y-1 hover:text-red-700 cursor-pointer duration-300">
+      <Card className="pt-6 hover:shadow-none transition-all hover:translate-y-1 hover:text-red-700 cursor-pointer duration-300 h-full">
         <CardContent className="flex justify-between items-center gap-4">
           <img
             src={img || ""}
@@ -39,9 +39,9 @@ const UserCard: React.FC<UserCardProps> = ({
           />
           <div className="flex flex-col gap-2">
             <CardTitle className="text-xl line-clamp-1">{name}</CardTitle>
-            <div className="flex flex-row gap-2">
+            <div className="flex flex-row flex-wrap gap-2">
               {tags!.slice(0, 3).map((tag) => (
-                <Badge className="hover:bg-red-700" key={tag}>
+                <Badge className="hover:bg-red-700 line-clamp-1" key={tag}>
                   {tag}
                 </Badge>
               ))}
