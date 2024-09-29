@@ -2,6 +2,9 @@
 
 import {db} from "@/lib/db";
 import {currentUser} from "@/lib/auth";
+import {ElasticIndexes, elasticSearch} from "@/lib/elasticSearch";
+
+import {userPublicFields} from "@/lib/userPublicFields";
 
 export type UserType = 'FREELANCER' | 'BUSINESS' | 'NGO';
 
@@ -26,11 +29,18 @@ export async function fulfillUserData(data: UserDataToBeFulfilled) {
         return {error: "Description is required!"};
     }
 
-    await db.user.update({
+    const newUserData = await db.user.update({
         where: {id: user.id},
         data: {
             ...data,
             isFulfilled: true,
-        }
+        },
+        select: userPublicFields,
+    });
+
+    await elasticSearch.index({
+        index: ElasticIndexes.UserIndex,
+        id: user.id,
+        document: newUserData,
     });
 }
