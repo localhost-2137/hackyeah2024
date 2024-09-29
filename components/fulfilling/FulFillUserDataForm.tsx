@@ -11,6 +11,7 @@ import { fulfillUserData } from "@/actions/fulfill-user-data";
 import { useRouter } from "next/navigation";
 import { DotLoader } from "react-spinners";
 import { div } from "framer-motion/client";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 
 type UserType = "FREELANCER" | "BUSINESS" | "NGO";
 
@@ -289,13 +290,12 @@ export function AvatarChoosing({
         }}
         type="file"
       />
-      {image ? (
-        <img src={image} className="w-[200px] h-[200px] rounded-full" />
-      ) : (
-        <div className="w-[200px] h-[200px] rounded-full bg-sky-500 flex items-center justify-center">
-          <FaUser className="text-white" size={64} />
-        </div>
-      )}
+      <Avatar>
+        <AvatarImage src={image || ""} />
+        <AvatarFallback className="bg-sky-500">
+          <FaUser className="text-white" />
+        </AvatarFallback>
+      </Avatar>
     </div>
   );
 }
