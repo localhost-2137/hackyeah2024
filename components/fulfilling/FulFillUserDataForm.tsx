@@ -34,7 +34,7 @@ export default function FulFillUserDataForm() {
   const Router = useRouter();
 
   useEffect(() => {
-    getUser().then((data) => {
+    getUser().then((data: any) => {
       if (data) {
         if (data.data.isFulfilled) {
           Router.push("/settings");

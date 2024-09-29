@@ -2,7 +2,6 @@
 import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 
-<<<<<<< HEAD
 import {userPublicFields} from "@/lib/userPublicFields";
 
 export async function getUser() {
@@ -10,15 +9,6 @@ export async function getUser() {
     if (!user) {
         return {error: "User not found!"};
     }
-=======
-export async function getUser(): Promise<
-  any
-> {
-  const user = await currentUser();
-  if (!user) {
-    return { error: "User not found!" };
-  }
->>>>>>> 280004f0f4b1a0658327625c243e95da41250680
 
   const userData = await db.user.findUnique({
     where: { id: user.id },

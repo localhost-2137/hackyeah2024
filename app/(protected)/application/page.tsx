@@ -36,7 +36,7 @@ interface SearchProps {
 }
 
 const ApplicationPage = async ({ searchParams }: SearchProps) => {
-  const users = await getUserList(100, 0, searchParams.type as UserType);
+  const users: any = await getUserList(100, 0, searchParams.type as UserType);
   return (
     <div className="container mt-2 flex flex-col gap-2">
       <h3 className="text-3xl">Przeglądaj</h3>
@@ -46,7 +46,7 @@ const ApplicationPage = async ({ searchParams }: SearchProps) => {
       </div>
       <h3 className="text-3xl">Polecane</h3>
       <div className="flex flex-row gap-2">
-        {companies.map((company) => (
+        {companies.map((company: any) => (
           <UserCard
             key={company.name}
             img={company.img}
@@ -58,7 +58,7 @@ const ApplicationPage = async ({ searchParams }: SearchProps) => {
       </div>
       <h3 className="text-3xl">Wszystkie</h3>
       <div className="flex flex-col gap-2">
-        {users.map((company) => (
+        {users.map((company: any) => (
           <CompanyCard
             key={company.name}
             img={company.image!}
