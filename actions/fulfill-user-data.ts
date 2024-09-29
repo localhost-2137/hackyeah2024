@@ -4,11 +4,15 @@ import {db} from "@/lib/db";
 import {currentUser} from "@/lib/auth";
 import {ElasticIndexes, elasticSearch} from "@/lib/elasticSearch";
 import {userPublicFields} from "@/lib/userPublicFields";
+<<<<<<< HEAD
 import {gemini} from "@/lib/gemini";
 
 export type UserType = 'FREELANCER' | 'BUSINESS' | 'NGO';
 const MIN_FAQ_QUESTION_COUNT = 7;
 const FAILED_RETRY_LIMIT = 3;
+=======
+import { UserType } from "@prisma/client";
+>>>>>>> c384a4b32a8af9ec09dd6615c076bcecb478cac4
 
 interface UserDataToBeFulfilled {
     name: string;

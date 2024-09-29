@@ -4,6 +4,7 @@ import UsersFilter from "./components/UsersFilter";
 import { getUserList } from "@/actions/user-list";
 import { UserType } from "@prisma/client";
 import UserCard from "@/components/application/user-card";
+import Link from "next/link";
 
 const companies = [
   {
@@ -62,17 +63,19 @@ const ApplicationPage = async ({ searchParams }: SearchProps) => {
             <UsersFilter />
           </div>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-row flex-wrap gap-2">
           {users.length > 0 ? (
             users.map((company: any, i: number) => (
-              <CompanyCard
-                key={company.name}
-                img={company.image!}
-                name={company.name!}
-                description={company.description!}
-                tags={company.tags}
-                index={i}
-              />
+                <Link key={company.name} href={`/user/${company.id}`}>
+                  <CompanyCard
+                      img={company.image!}
+                      name={company.name!}
+                      description={company.description!}
+                      tags={company.tags}
+                      index={i}
+                  />
+                </Link>
+
             ))
           ) : (
             <p className="w-full text-center">Brak wyników</p>

@@ -1,7 +1,7 @@
 "use server";
 
 import {db} from "@/lib/db";
-import {UserType} from "@/actions/fulfill-user-data";
+import {UserType} from "@prisma/client";
 import {ElasticIndexes, elasticSearch} from "@/lib/elasticSearch";
 import {currentUser} from "@/lib/auth";
 
@@ -48,12 +48,11 @@ export async function getUserList(take: number, skip: number, userType?: UserTyp
             .filter((id) => typeof id === "string");
 
     } catch (error: any) {
-        // if statusCode is not 404, throw the error
-        if (!error?.meta || error.meta.statusCode !== 404) {
-            throw error;
-        }
+        console.error("Error fetching recommended users", error);
+        console.warn("We're not using ElasticSearch to fetch recommended users");
     }
 
+    // TODO: Make it exactly the same order as in the ElasticSearch query
     return db.$queryRaw`
       SELECT "id", "email", "name", "description", "type", "image", "tags", "updatedAt", "createdAt"
       FROM "User"
@@ -68,4 +67,4 @@ export async function getUserList(take: number, skip: number, userType?: UserTyp
         "id" ASC
       LIMIT ${take} OFFSET ${skip}
     `;
-};
+}
