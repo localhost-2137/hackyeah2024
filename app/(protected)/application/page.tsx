@@ -63,7 +63,7 @@ const ApplicationPage = async ({ searchParams }: SearchProps) => {
             <UsersFilter />
           </div>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-row flex-wrap gap-2">
           {users.length > 0 ? (
             users.map((company: any, i: number) => (
                 <Link key={company.name} href={`/user/${company.id}`}>
