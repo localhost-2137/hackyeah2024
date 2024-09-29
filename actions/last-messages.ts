@@ -29,6 +29,9 @@ export const getLastMessages = async () => {
       receiver: {
         select: userPublicFields,
       },
+      sender: {
+        select: userPublicFields,
+      }
     },
     orderBy: {
       createdAt: "desc",
@@ -38,8 +41,8 @@ export const getLastMessages = async () => {
   console.log(messages);
 
   const chats = messages.map((message) => ({
-    id: message.receiver.id,
-    recipient: message.receiver.name,
+    id: user.id === message.senderId ? message.receiverId : message.senderId,
+    recipient: user.id === message.senderId ? message.receiver.name : message.sender.name,
     lastMessage: message.content,
   }));
 
