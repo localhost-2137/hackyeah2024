@@ -48,7 +48,7 @@ export default function FulFillUserDataForm() {
     getUser().then((data: any) => {
       if (data) {
         if (data.data.isFulfilled) {
-          Router.push("/settings");
+          Router.push("/application");
         }
         setUser(data.data);
         setName(data.data.name);
@@ -60,7 +60,7 @@ export default function FulFillUserDataForm() {
   }, []);
 
   useEffect(() => {
-    setCurrentStep(2);
+    if (role !== undefined) setCurrentStep(2);
   }, [setCurrentStep, role]);
 
   const handleImageChange = async (event: any) => {
@@ -87,7 +87,7 @@ export default function FulFillUserDataForm() {
         if (data?.error) {
           alert(data.error);
         } else {
-          Router.push("/settings");
+          Router.push("/application");
         }
       });
     });

@@ -100,12 +100,12 @@ export default function ChatPage() {
 
     return (
         <main className="py-10 px-5 max-w-[1400px] mx-auto flex flex-col gap-4">
-            <Card className="px-10 py-5 min-h-[600px]">
+            <Card className="px-10 py-5 max-h-[600px]">
                 <CardHeader>
                     <CardTitle className="text-2xl">Czat z {chatData!.data.length > 0 ? chatData!.recipient : "użytkownik"}</CardTitle>
                 </CardHeader>
                 <Separator/>
-                <CardContent className="flex flex-col gap-4 py-4 overflow-scroll">
+                <CardContent className="flex flex-col gap-4 py-4 overflow-y-scroll max-h-[450px]">
                     {
                         chatData!.data.length > 0 ? chatData!.data.map((message) => {
 

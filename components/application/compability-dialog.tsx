@@ -15,6 +15,7 @@ import {
 import partnershipCompatibility from "@/actions/compatibility";
 import {useEffect, useState} from "react";
 import {LottieAnimation} from "@/components/lottie-animation";
+import Link from "next/link";
 
 export const CompabilityDialog = ({potentialPartnerId}: { potentialPartnerId: string }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -64,8 +65,9 @@ export const CompabilityDialog = ({potentialPartnerId}: { potentialPartnerId: st
                                         className="font-semibold text-xl">{data?.rating} %</span></p>
                                     <p className="text-sm font-light">Szacowana ocena AI nie zawsze musi byc wiarygodna</p>
                                 </div>
-                                {/*// TODO: Add a link to the chat*/}
-                                <Button className="bg-red-700 hover:bg-red-800" type="submit">Przejdź do czatu</Button>
+                                <Button className="bg-red-700 hover:bg-red-800" type="submit">
+                                    <Link href={`/chat/${potentialPartnerId}`}>Przejdź do czatu</Link>
+                                </Button>
                             </div>
                         </DialogFooter>
                     </>
