@@ -39,34 +39,45 @@ const ApplicationPage = async ({ searchParams }: SearchProps) => {
   const users: any = await getUserList(100, 0, searchParams.type as UserType);
   return (
     <div className="container mt-2 flex flex-col gap-2">
-      <h3 className="text-3xl">Przeglądaj</h3>
-      <div className="flex flex-row gap-2 items-center">
-        <Label>Wybierz typ</Label>
-        <UsersFilter />
+      <div className="w-full bg-background p-8 rounded-lg shadow mt-8">
+        <h3 className="text-3xl font-semibold mb-4">Polecane</h3>
+        <div className="flex flex-row gap-2">
+          {companies.map((company: any, i: number) => (
+            <UserCard
+              key={company.name}
+              img={company.img}
+              name={company.name}
+              description={company.description}
+              tags={company.tags}
+              index={i}
+            />
+          ))}
+        </div>
       </div>
-      <h3 className="text-3xl">Polecane</h3>
-      <div className="flex flex-row gap-2">
-        {companies.map((company: any) => (
-          <UserCard
-            key={company.name}
-            img={company.img}
-            name={company.name}
-            description={company.description}
-            tags={company.tags}
-          />
-        ))}
-      </div>
-      <h3 className="text-3xl">Wszystkie</h3>
-      <div className="flex flex-col gap-2">
-        {users.map((company: any) => (
-          <CompanyCard
-            key={company.name}
-            img={company.image!}
-            name={company.name!}
-            description={company.description!}
-            tags={company.tags}
-          />
-        ))}
+      <div className="w-full bg-background p-8 rounded-lg shadow">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-3xl">Wszystkie</h3>
+          <div className="flex flex-row gap-2 items-center">
+            <Label>Wybierz typ</Label>
+            <UsersFilter />
+          </div>
+        </div>
+        <div className="flex flex-col gap-2">
+          {users.length > 0 ? (
+            users.map((company: any, i: number) => (
+              <CompanyCard
+                key={company.name}
+                img={company.image!}
+                name={company.name!}
+                description={company.description!}
+                tags={company.tags}
+                index={i}
+              />
+            ))
+          ) : (
+            <p className="w-full text-center">Brak wyników</p>
+          )}
+        </div>
       </div>
     </div>
   );
