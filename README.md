@@ -28,3 +28,5 @@ GEMINI_API_KEY=geminiapikey
 
 Na tym etapie, aby skorzystać z aplikacji wystarczy otworzyć stronę `http://localhost:3000/`
 Udanej zabawy!
+
+Screeny z aplikacji dostępne w folderze [assets](./assets)
