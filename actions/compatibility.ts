@@ -6,7 +6,7 @@ import {userPublicFields} from "@/lib/userPublicFields";
 import {gemini} from "@/lib/gemini";
 
 interface CompatibilityRetData {
-    rating: number,
+    rating: number, // 0-100%
     description: string,
 }
 

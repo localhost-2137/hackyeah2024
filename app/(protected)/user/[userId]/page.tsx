@@ -7,10 +7,13 @@ import {getPublicUserData} from "@/actions/user-data";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {FaUser} from "react-icons/fa";
 import {Badge} from "@/components/ui/badge";
+import {CompabilityDialog} from "@/components/application/compability-dialog";
 
 export interface IFaq {
+    id: string,
+    userId: string,
     question: string,
-    answer?: string,
+    answer: string | null,
 }
 
 interface IUser {
@@ -23,29 +26,12 @@ interface IUser {
     tags: string[],
     updatedAt: Date,
     createdAt: Date,
+    faqQuestions: IFaq[],
 }
 
-export default async function CompanyPage({params}: { params: { userId: string } }) {
-
+export default async function CompanyPage({params}: Readonly<{ params: { userId: string } }>) {
     const userId = params.userId
-    const {data}: { data?: IUser } = await getPublicUserData(userId)
-
-    console.log(data)
-
-    const faqs: IFaq[] = [
-        {
-            question: "Is it accessible?",
-            answer: "Yes. It adheres to the WAI-ARIA design pattern."
-        },
-        {
-            question: "Is it secure?",
-            answer: "Yes. It uses the latest security protocols."
-        },
-        {
-            question: "Is it reliable?",
-            answer: "Yes. It has a 99.9% uptime guarantee."
-        },
-    ]
+    const { data }: { data?: IUser } = await getPublicUserData(userId)
 
     if (!data) {
         return <div>Brak danych</div>
@@ -54,14 +40,17 @@ export default async function CompanyPage({params}: { params: { userId: string }
     return (
         <main className="w-[80%] max-w-[1400px] mx-auto p-10">
             <Card className="p-5">
-                <CardHeader className="flex flex-row gap-6 items-center">
-                    <Avatar>
-                        <AvatarImage src={data?.image || ""}/>
-                        <AvatarFallback className="bg-sky-500">
-                            <FaUser className="text-white"/>
-                        </AvatarFallback>
-                    </Avatar>
-                    <CardTitle className="text-4xl">{data.name}</CardTitle>
+                <CardHeader className="flex flex-row gap-6 items-center justify-between">
+                    <div className="flex flex-row gap-6 ">
+                        <Avatar>
+                            <AvatarImage src={data?.image ?? ""}/>
+                            <AvatarFallback className="bg-sky-500">
+                                <FaUser className="text-white"/>
+                            </AvatarFallback>
+                        </Avatar>
+                        <CardTitle className="text-4xl">{data.name}</CardTitle>
+                    </div>
+                    <CompabilityDialog potentialPartnerId={userId} />
                 </CardHeader>
                 <Separator/>
                 <CardContent className="py-6">
@@ -80,9 +69,9 @@ export default async function CompanyPage({params}: { params: { userId: string }
                     <Separator/>
                     <CardContent className="py-6">
                         <h3 className="text-2xl font-semibold py-2">Tagi</h3>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-4 gap-4">
                             {data.tags.map((tag, index) => (
-                                <Badge key={index}
+                                <Badge key={"ccontent-"+index}
                                        className="bg-red-700 text-white hover:bg-red-700 p-2 rounded-xl">{tag}</Badge>
                             ))}
                         </div>
@@ -96,7 +85,7 @@ export default async function CompanyPage({params}: { params: { userId: string }
                 <Separator/>
                 <CardContent className="py-6">
                     <AiSuspense>
-                        <CompanyFaq companyName={data.name as string} faqs={faqs}/>
+                        <CompanyFaq faqQuestions={data.faqQuestions} />
                     </AiSuspense>
                 </CardContent>
             </Card>

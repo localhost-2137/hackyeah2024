@@ -8,7 +8,9 @@ export async function getFaqAnswer(questionId: string) {
     const faqQuestion = await db.faqQuestion.findUnique({
         where: {id: questionId},
         select: {
+            id: true,
             question: true,
+            userId: true,
             answer: true,
             user: {
                 select: {
