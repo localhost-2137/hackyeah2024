@@ -1,6 +1,6 @@
-import { db } from "@/lib/db";
-import { UserType } from "@prisma/client";
+import { PrismaClient, UserType } from "@prisma/client";
 
+const db = new PrismaClient();
 const hashedDummyPassword =
   "$2a$10$rApU36vyoahl1UpmTaDaX.Q8DNo2SMoPqviLqc4.kp3KP7.TFHS1K";
 
