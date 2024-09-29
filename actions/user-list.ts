@@ -5,8 +5,8 @@ import {UserType} from "@prisma/client";
 import {ElasticIndexes, elasticSearch} from "@/lib/elasticSearch";
 import {currentUser} from "@/lib/auth";
 
-export async function getUserList(take: number, skip: number, userType?: UserType) {    
-    const type = userType ? [userType] : [];
+export async function getUserList(take: number, skip: number, userType?: UserType | UserType[]) {    
+    const type = userType ? (Array.isArray(userType) ? userType : [userType]) : ["FREELANCER", "BUSINESS", "NGO"];
     const user = await currentUser();
     
 
