@@ -14,28 +14,69 @@ enum UserType {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String        @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?       @unique
   emailVerified DateTime?
-  isFulfilled  Boolean   @default(false)
+  isFulfilled   Boolean       @default(false)
   type          UserType?
-  tags          String[] @default([])
+  tags          String[]      @default([])
   image         String?
   description   String?
   password      String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
   faqQuestions  FaqQuestion[]
   accounts      Account[]
   Token         Token[]
+  ChatMessagesSent     ChatMessage[] @relation("Sender")
+  ChatMessagesReceived ChatMessage[] @relation("Receiver")
+}
+
+enum ChatMessageType {
+  TEXT
+  CONTRACT
+}
+
+model ChatMessage {
+  id         String          @id @default(cuid())
+  senderId   String
+  receiverId String
+  content    String
+  type       ChatMessageType @default(TEXT)
+  createdAt  DateTime        @default(now())
+  Contract   Contract?
+
+  sender   User @relation(name: "Sender", fields: [senderId], references: [id])
+  receiver User @relation(name: "Receiver", fields: [receiverId], references: [id])
+}
+
+enum ContractStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  MONEY_SENT
+  DECLARED_COMPLETE
+  PAID
+  SUBMITTED_TO_THE_COURT
+}
+
+model Contract {
+  id        String         @id @default(cuid())
+  messageId String         @unique
+  status    ContractStatus @default(PENDING)
+  amount    Float
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  message ChatMessage @relation(fields: [messageId], references: [id])
 }
 
 model FaqQuestion {
-  id        String   @id @default(cuid())
-  userId    String
-  question  String
-  answer    String?
+  id       String  @id @default(cuid())
+  userId   String
+  question String
+  answer   String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
