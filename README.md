@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TrustLink
 
-## Getting Started
+Cześć,
+Witamy w README naszego projektu na hackhathon hackYeah 2024.
+Aby odpalić naszą aplikację należy posiadać nodejs oraz dockera, a następnie wykonaj poniższe polecenia:
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+stwórz plik `.env` z zawartością podobną do tej poniżej:
+```
+AUTH_SECRET="authsecret"
+DATABASE_URL=postgres://root:password@localhost:5432/hackyeah
+AUTH_TRUST_HOST=http://localhost:3000
+EMAIL_USER=example@example.com
+EMAIL_HOST=smtp.example.com
+EMAIL_HOST_PASSWORD=password
+GOOGLE_CLIENT_ID=clientid
+GOOGLE_CLIENT_SECRET=client secret
+NEXTAUTH_JWT_SECRET=jwtsecret
+NEXTAUTH_SECRET=nextauthsecret
+GEMINI_API_KEY=geminiapikey
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Zainstaluj pnpm
+```bash
+npm i -g pnpm
+```
+2. Zainstaluj zależności
+```bash
+pnpm install
+```
+3. Włącz baze danych i silnik wyszukiwania
+```bash
+docker compose up --build
+```
+4. Zaktualizuj strukturę bazy danych
+```bash
+npx prisma db push
+```
+5. Uzupełnij bazę przykładowymi rekordami
+```bash
+pnpm prisma-seed
+```
+6. Uruchom aplikację w trybie deweloperskim
+```bash
+pnpm dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Na tym etapie, aby skorzystać z aplikacji wystarczy otworzyć stronę `http://localhost:3000/`
+Udanej zabawy!
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Screeny z aplikacji dostępne w folderze [assets](./assets)
 
-## Learn More
+![image info](./assets/1.png)
 
-To learn more about Next.js, take a look at the following resources:
+![image info](./assets/2.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![image info](./assets/3.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![image info](./assets/4.png)
 
-## Deploy on Vercel
+![image info](./assets/5.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![image info](./assets/6.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![image info](./assets/7.png)
+
+![image info](./assets/8.png)
+
+![image info](./assets/9.png)
