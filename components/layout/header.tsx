@@ -11,7 +11,7 @@ export default function Header() {
       <div className="max-w-[1400px] mx-auto flex flex-row gap-8 items-center">
         <Link href="/application" className="mr-auto">
           <h1 className="text-4xl font-semibold flex gap-2">
-            <Image src={Logo} alt="TrustLink logo" className="w-8 h-8" />
+            <Image src={Logo} alt="TrustLink logo" className="w-8 h-8 brightness-200" />
             TrustLink
           </h1>
         </Link>
