@@ -30,3 +30,21 @@ Na tym etapie, aby skorzystać z aplikacji wystarczy otworzyć stronę `http://
 Udanej zabawy!
 
 Screeny z aplikacji dostępne w folderze [assets](./assets)
+
+![image info](./assets/1.png)
+
+![image info](./assets/2.png)
+
+![image info](./assets/3.png)
+
+![image info](./assets/4.png)
+
+![image info](./assets/5.png)
+
+![image info](./assets/6.png)
+
+![image info](./assets/7.png)
+
+![image info](./assets/8.png)
+
+![image info](./assets/9.png)
