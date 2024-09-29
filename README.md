@@ -19,12 +19,30 @@ NEXTAUTH_SECRET=nextauthsecret
 GEMINI_API_KEY=geminiapikey
 ```
 
-`npm i -g pnpm` - Opcjonalne, jednakże rekomenduje korzystać z `pnpm` zamiast `npm`, ponieważ na `npm` projekt nie jest do końca przetestowany
-`pnpm i` - Instalacja zależności
-`docker compose up --build` - Uruchomienie bazy danych i silnika wyszukiwania (postgres & elasticsearch)
-`pnpx prisma db push` - Zaaktualizuj strukturę bazy danych
-`pnpm prisma-seed` - uzupełnij bazę danych przykładowymi rekordami
-`pnpm dev` - uruchom aplikację w trybie deweloperskim
+1. Zainstaluj pnpm
+```bash
+npm i -g pnpm
+```
+2. Zainstaluj zależności
+```bash
+pnpm install
+```
+3. Włącz baze danych i silnik wyszukiwania
+```bash
+docker compose up --build
+```
+4. Zaktualizuj strukturę bazy danych
+```bash
+npx prisma db push
+```
+5. Uzupełnij bazę przykładowymi rekordami
+```bash
+pnpm prisma-seed
+```
+6. Uruchom aplikację w trybie deweloperskim
+```bash
+pnpm dev
+```
 
 Na tym etapie, aby skorzystać z aplikacji wystarczy otworzyć stronę `http://localhost:3000/`
 Udanej zabawy!
