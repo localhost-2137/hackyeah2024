@@ -20,12 +20,12 @@ export default function Header() {
           <Link
             href="/application"
             className={
-              `relative after:absolute after:h-full after:bg-red-700 after:text-center after:rounded-lg px-2 ` +
-              `after:px-2 after:content-['Wyszukiwarka'] after:left-0 after:hover:w-full after:text-transparent after:opacity-0 ` +
+              `relative after:absolute after:h-full text-nowrap after:bg-red-700 after:text-center after:rounded-lg px-2 ` +
+              `after:px-2 after:content-['Strona_główna'] after:left-0 after:hover:w-full after:text-transparent after:opacity-0 ` +
               `after:hover:opacity-100 after:hover:text-background after:w-0 after:transition-all after:origin-left after:duration-500`
             }
           >
-            Wyszukiwarka
+            Strona główna
           </Link>
           <Separator orientation="vertical" className="bg-red-700 mx-4" />
           <CiChat1 color="text-red-800" size={24} />

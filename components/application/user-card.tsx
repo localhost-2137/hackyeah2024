@@ -41,7 +41,7 @@ const UserCard: React.FC<UserCardProps> = ({
             <CardTitle className="text-xl line-clamp-1">{name}</CardTitle>
             <div className="flex flex-row flex-wrap gap-2">
               {tags!.slice(0, 3).map((tag) => (
-                <Badge className="hover:bg-red-700 line-clamp-1" key={tag}>
+                <Badge className="hover:bg-red-800 bg-red-700 line-clamp-1" key={tag}>
                   {tag}
                 </Badge>
               ))}

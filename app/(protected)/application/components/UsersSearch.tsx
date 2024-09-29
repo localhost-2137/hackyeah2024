@@ -28,7 +28,7 @@ export default function UsersSearch() {
         <div className="flex flex-row gap-2 items-center">
             <Input value={value} onChange={(e) => setValue(e.target.value)}
                    className="max-w-[300px]" placeholder="Wyszukaj według frazy..."/>
-            <Button onClick={clickHandler}><MdSend/></Button>
+            <Button className="bg-red-700 hover:bg-red-800" onClick={clickHandler}><MdSend/></Button>
         </div>
     )
 }

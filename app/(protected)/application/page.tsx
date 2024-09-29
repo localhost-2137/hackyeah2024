@@ -7,6 +7,8 @@ import UserCard from "@/components/application/user-card";
 import Link from "next/link";
 import UsersSearch from "@/app/(protected)/application/components/UsersSearch";
 import {search} from "@/actions/search";
+import {getUser} from "@/actions/user-data";
+import {redirect} from "next/navigation";
 
 interface SearchProps {
     searchParams: {
@@ -16,6 +18,12 @@ interface SearchProps {
 }
 
 const ApplicationPage = async ({searchParams}: SearchProps) => {
+    const currentUser = await getUser();
+
+    if (!currentUser?.data?.isFulfilled) {
+        redirect("/fulfill");
+    }
+
     const recommended: any = await getUserList(3, 0);
     let users: any = searchParams.search ? await search(searchParams.search, 10, 0) : await getUserList(100, 0, searchParams.type as UserType);
     if (users.length > 0) {
@@ -27,7 +35,7 @@ const ApplicationPage = async ({searchParams}: SearchProps) => {
     return (
         <div className="container my-8 flex flex-col gap-2">
             <div className="w-full p-8 rounded-lg mt-8">
-                <h3 className="text-3xl font-semibold mb-4">Polecane</h3>
+                <h3 className="text-3xl font-semibold mb-4">Polecane dla Ciebie</h3>
                 <div className="flex flex-row gap-2">
                     {recommended.map((company: any, i: number) => (
                         <Link
@@ -74,7 +82,7 @@ const ApplicationPage = async ({searchParams}: SearchProps) => {
                             </Link>
                         ))
                     ) : (
-                        <p className="w-full text-center">Brak wyników</p>
+                        <p className="w-full text-center p-5">Brak wyników</p>
                     )}
                 </div>
             </div>

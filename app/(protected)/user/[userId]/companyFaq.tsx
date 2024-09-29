@@ -21,7 +21,6 @@ export default async function CompanyFaq({faqQuestions}: Readonly<{ faqQuestions
                             <AccordionItem key={"aitem-"+index} value={`item-${index}`}>
                                 <AccordionTrigger>{faqQuestion.question}</AccordionTrigger>
                                 <AccordionContent>
-                                    {faqQuestion.answer ?? (
                                         <Suspense fallback={(
                                             <div className="flex items-center space-x-2">
                                                 <LottieAnimation animationData={animationData} loop={true}
@@ -31,7 +30,6 @@ export default async function CompanyFaq({faqQuestions}: Readonly<{ faqQuestions
                                         )}>
                                             {FaqAnswer({questionId: faqQuestion.id})}
                                         </Suspense>
-                                    )}
                                 </AccordionContent>
                             </AccordionItem>
                         )
