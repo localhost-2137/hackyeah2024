@@ -1,21 +1,19 @@
-"use server";
-
+"use server";;
 import {db} from "@/lib/db";
 import {currentUser} from "@/lib/auth";
 import {ElasticIndexes, elasticSearch} from "@/lib/elasticSearch";
 
 import {userPublicFields} from "@/lib/userPublicFields";
-import { UserType } from "@prisma/client";
 
-interface UserDataToBeFulfilled {
+interface UserData {
     name: string;
+    email: string;
     description: string;
-    type: UserType;
     image: string;
     tags: string[];
 }
 
-export async function fulfillUserData(data: UserDataToBeFulfilled) {
+export async function updateSettings(data: UserData) {
     const user = await currentUser();
     if (!user) {
         return {error: "User not found!"};
@@ -32,7 +30,6 @@ export async function fulfillUserData(data: UserDataToBeFulfilled) {
         where: {id: user.id},
         data: {
             ...data,
-            isFulfilled: true,
         },
         select: userPublicFields,
     });

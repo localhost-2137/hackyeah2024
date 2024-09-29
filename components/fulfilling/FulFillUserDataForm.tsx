@@ -21,6 +21,16 @@ interface UserDataToBeFulfilled {
   tags: string[];
 }
 
+export const convertToBase64 = (file: any) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+};
+
+
 export default function FulFillUserDataForm() {
   const [user, setUser] = useState<any>();
   const [role, setRole] = useState<UserType>();
@@ -51,15 +61,6 @@ export default function FulFillUserDataForm() {
   useEffect(() => {
     setCurrentStep(2);
   }, [setCurrentStep, role]);
-
-  const convertToBase64 = (file: any) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  };
 
   const handleImageChange = async (event: any) => {
     const file = event.target.files[0];
@@ -163,7 +164,7 @@ function RoleChoosing({ setRole }: { setRole: (role: UserType) => void }) {
   );
 }
 
-function NameAndTageChoosing({
+export function NameAndTageChoosing({
   name,
   setName,
   tags,
@@ -247,7 +248,7 @@ function Controls({
   );
 }
 
-function DescriptionChoosing({
+export function DescriptionChoosing({
   description,
   setDescription,
 }: {
@@ -269,7 +270,7 @@ function DescriptionChoosing({
   );
 }
 
-function AvatarChoosing({
+export function AvatarChoosing({
   image,
   handleImageChange,
 }: {
