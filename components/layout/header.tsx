@@ -10,13 +10,13 @@ export default function Header() {
     <header className="w-full h-fit p-6 bg-background border-b !border-red-700 text-red-700">
       <div className="max-w-[1400px] mx-auto flex flex-row gap-8 items-center">
         <Link href="/application" className="mr-auto">
-          <h1 className="text-4xl font-semibold flex gap-2">
-            <Image src={Logo} alt="TrustLink logo" className="w-8 h-8 brightness-200" />
-            TrustLink
+          <h1 className="flex space-x-3 items-center uppercase text-2xl md:text-3xl text-red-700 font-medium tracking-widest">
+            <Image src={Logo} alt="TrustLink logo" className="w-8 h-8 brightness-200"/>
+            <span>TrustLink</span>
           </h1>
         </Link>
         <div className="flex flex-row items-center h-6 font-semibold">
-          <CiSearch color="text-red-800" size={24} />
+        <CiSearch color="text-red-800" size={24} />
           <Link
             href="/application"
             className={
