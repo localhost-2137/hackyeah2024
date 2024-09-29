@@ -3,13 +3,14 @@
 import { useEffect, useState, useTransition } from "react";
 import { SiFreelancer } from "react-icons/si";
 import { IoIosBusiness } from "react-icons/io";
-import { FaBuildingNgo } from "react-icons/fa6";
+import { FaBuildingNgo, FaUser } from "react-icons/fa6";
 import { getUser } from "@/actions/user-data";
 import { Input } from "../ui/input";
 import MultipleSelector, { Option } from "../ui/multiple-selector";
 import { fulfillUserData } from "@/actions/fulfill-user-data";
 import { useRouter } from "next/navigation";
 import { DotLoader } from "react-spinners";
+import { div } from "framer-motion/client";
 
 type UserType = "FREELANCER" | "BUSINESS" | "NGO";
 
@@ -183,6 +184,7 @@ export function NameAndTageChoosing({
         onChange={(e) => {
           setName(e.target.value);
         }}
+        maxLength={20}
         defaultValue={name}
         type="input"
       />
@@ -287,7 +289,13 @@ export function AvatarChoosing({
         }}
         type="file"
       />
-      <img src={image} className="w-[200px] h-[200px] rounded-full" />
+      {image ? (
+        <img src={image} className="w-[200px] h-[200px] rounded-full" />
+      ) : (
+        <div className="w-[200px] h-[200px] rounded-full bg-sky-500 flex items-center justify-center">
+          <FaUser className="text-white" size={64} />
+        </div>
+      )}
     </div>
   );
 }
