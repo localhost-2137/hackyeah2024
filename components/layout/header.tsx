@@ -13,8 +13,8 @@ export default function Header() {
           <Link
             href="/application"
             className={
-              `relative after:absolute after:h-full after:bg-red-700 after:text-center after:rounded-lg px-2` +
-              `after:px-2 after:content-['Czat'] after:left-0 after:hover:w-full after:text-transparent after:opacity-0` +
+              `relative after:absolute after:h-full after:bg-red-700 after:text-center after:rounded-lg px-2 ` +
+              `after:px-2 after:content-['Wyszukiwarka'] after:left-0 after:hover:w-full after:text-transparent after:opacity-0 ` +
               `after:hover:opacity-100 after:hover:text-background after:w-0 after:transition-all after:origin-left after:duration-500`
             }
           >
@@ -23,8 +23,8 @@ export default function Header() {
           <Separator orientation="vertical" className="bg-red-700" />
           <Link
             className={
-              `relative after:absolute after:h-full after:bg-red-700 after:text-center after:rounded-lg px-2` +
-              `after:px-2 after:content-['Czat'] after:left-0 after:hover:w-full after:text-transparent after:opacity-0` +
+              `relative after:absolute after:h-full after:bg-red-700 after:text-center after:rounded-lg px-2 ` +
+              `after:px-2 after:content-['Czat'] after:left-0 after:hover:w-full after:text-transparent after:opacity-0 ` +
               `after:hover:opacity-100 after:hover:text-background after:w-0 after:transition-all after:origin-left after:duration-500`
             }
             href="/chat"
