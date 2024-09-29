@@ -1,6 +1,7 @@
-import {auth} from "@/auth"
-import {UserButton} from "@/components/auth/user-button";
-import {Card, CardContent, CardHeader} from "@/components/ui/card";
+import { auth } from "@/auth"
+import { UserButton } from "@/components/auth/user-button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import SettingsForm from "./components/SettingsForm";
 
 interface ISession {
     user: {
@@ -23,12 +24,10 @@ const SettingsPage = async () => {
         <main className="p-10">
             <Card className="max-w-[1400px] mx-auto p-5">
                 <CardHeader className="flex flex-row justify-between items-center">
-                    <h1 className="text-2xl font-semibold">Profile Settings</h1>
+                    <h1 className="text-2xl font-semibold">Ustawienia</h1>
                 </CardHeader>
                 <CardContent className="grid grid-cols-2 gap-4">
-                    <p>Id: {session.user.id}</p>
-                    <p>Nazwa: {session.user.name}</p>
-                    <p>Email: {session.user.email}</p>
+                    <SettingsForm />
                 </CardContent>
             </Card>
         </main>
