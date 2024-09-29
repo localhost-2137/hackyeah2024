@@ -1,17 +1,15 @@
-"use server";
-
 import {db} from "@/lib/db";
-import {currentUser} from "@/lib/auth";
-import {ElasticIndexes, elasticSearch} from "@/lib/elasticSearch";
 import {userPublicFields} from "@/lib/userPublicFields";
+import {ElasticIndexes, elasticSearch} from "@/lib/elasticSearch";
 import {gemini} from "@/lib/gemini";
 import {getOppositeType} from "@/lib/userUtils";
 
-export type UserType = 'FREELANCER' | 'BUSINESS' | 'NGO';
 const MIN_FAQ_QUESTION_COUNT = 7;
 const FAILED_RETRY_LIMIT = 3;
 
-interface UserDataToBeFulfilled {
+export type UserType = 'FREELANCER' | 'BUSINESS' | 'NGO';
+
+export interface UserDataToBeFulfilled {
     name: string;
     description: string;
     type: UserType;
@@ -19,13 +17,8 @@ interface UserDataToBeFulfilled {
     tags: string[];
 }
 
-export async function fulfillUserData(data: UserDataToBeFulfilled) {
-    const user = await currentUser();
-    if (!user) {
-        return {error: "User not found!"};
-    }
-
-    if (data.name.length < 3) {
+export async function _fulfillUserData(name: string, userId: string, data: UserDataToBeFulfilled) {
+    if (name.length < 3) {
         return {error: "Name is too short!"};
     }
     if (!data.description.length) {
@@ -41,7 +34,7 @@ export async function fulfillUserData(data: UserDataToBeFulfilled) {
             db.faqQuestion.create({
                 data: {
                     question,
-                    userId: user.id!,
+                    userId,
                 },
             }),
         );
@@ -50,7 +43,7 @@ export async function fulfillUserData(data: UserDataToBeFulfilled) {
     await db.$transaction(prismaTransactions);
 
     const newUserData = await db.user.update({
-        where: {id: user.id},
+        where: {id: userId},
         data: {
             ...data,
             isFulfilled: true,
@@ -60,7 +53,7 @@ export async function fulfillUserData(data: UserDataToBeFulfilled) {
 
     await elasticSearch.index({
         index: ElasticIndexes.UserIndex,
-        id: user.id,
+        id: userId,
         document: newUserData,
     });
 }

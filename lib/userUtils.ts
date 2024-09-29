@@ -1,4 +1,4 @@
-import {UserType} from "@/actions/fulfill-user-data";
+import {UserType} from "@/actions/fulfillUserData";
 
 export function getOppositeType(type: UserType): UserType {
     switch (type) {
