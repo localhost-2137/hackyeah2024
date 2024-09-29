@@ -3,10 +3,12 @@
 import {db} from "@/lib/db";
 import {currentUser} from "@/lib/auth";
 import {ElasticIndexes, elasticSearch} from "@/lib/elasticSearch";
-
 import {userPublicFields} from "@/lib/userPublicFields";
+import {gemini} from "@/lib/gemini";
 
 export type UserType = 'FREELANCER' | 'BUSINESS' | 'NGO';
+const MIN_FAQ_QUESTION_COUNT = 7;
+const FAILED_RETRY_LIMIT = 3;
 
 interface UserDataToBeFulfilled {
     name: string;
@@ -43,6 +45,38 @@ export async function fulfillUserData(data: UserDataToBeFulfilled) {
         id: user.id,
         document: newUserData,
     });
+
+    const res = await generateFaqQuestions(data.name, data.description);
+    console.log('Generated FAQ questions:', res);
 }
 
+export async function generateFaqQuestions(name: string, description: string, recursionCount = 0): Promise<string[]> {
+    const model = gemini.getGenerativeModel({model: "gemini-1.5"});
 
+    const prompt = `Generate interesting FAQ questions for \`${name}\` institution based on the following description: \`\`\`${description}\`\`\`. Focus on questions that would be relevant to potential partners.
+    Please generate a valid JSON string array containing unique strings. Ensure that the output is always a properly formatted JSON array, like this: ["string1", "string2", "string3"]. Avoid any additional text or explanation. Just provide the JSON string array.
+    The array should have at least ${MIN_FAQ_QUESTION_COUNT} questions.
+    `;
+
+    const response = await model.generateContent(prompt);
+
+    try {
+        let questions = JSON.parse(response.response.text());
+        if (!Array.isArray(questions)) {
+            throw new Error("Invalid response, expected an array.");
+        }
+
+        questions = questions.filter((question) => typeof question === "string" && question?.length > 0);
+        if (questions.length === 0) {
+            throw new Error("No questions generated.");
+        }
+
+        return questions;
+    } catch (e) {
+        if (recursionCount > FAILED_RETRY_LIMIT) {
+            throw e;
+        }
+        console.error("Failed to parse generated questions, retrying", e);
+        return generateFaqQuestions(name, description, recursionCount + 1);
+    }
+}
