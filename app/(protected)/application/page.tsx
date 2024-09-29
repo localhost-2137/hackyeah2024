@@ -5,6 +5,7 @@ import { getUserList } from "@/actions/user-list";
 import { UserType } from "@prisma/client";
 import UserCard from "@/components/application/user-card";
 import Link from "next/link";
+import {auth} from "@/auth";
 
 const companies = [
   {
@@ -37,7 +38,11 @@ interface SearchProps {
 }
 
 const ApplicationPage = async ({ searchParams }: SearchProps) => {
-  const users: any = await getUserList(100, 0, searchParams.type as UserType);
+  const session = await auth();
+
+  let users: any = await getUserList(100, 0, searchParams.type as UserType);
+  users = users.filter((user: any) => user.id !== session?.user?.id);
+
   return (
     <div className="container mt-2 flex flex-col gap-2">
       <div className="w-full bg-background p-8 rounded-lg shadow mt-8">
@@ -68,9 +73,9 @@ const ApplicationPage = async ({ searchParams }: SearchProps) => {
             users.map((company: any, i: number) => (
                 <Link key={company.name} href={`/user/${company.id}`}>
                   <CompanyCard
-                      img={company.image!}
-                      name={company.name!}
-                      description={company.description!}
+                      img={company.image}
+                      name={company.name}
+                      description={company.description}
                       tags={company.tags}
                       index={i}
                   />
