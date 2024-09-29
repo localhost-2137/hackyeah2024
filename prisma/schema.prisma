@@ -7,29 +7,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-<<<<<<< HEAD
-=======
 enum UserType {
   FREELANCER
   BUSINESS
   NGO
 }
 
->>>>>>> 0affe00c40e6b766c84487ef5941e04145a7d9f3
 model User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
   emailVerified DateTime?
-<<<<<<< HEAD
-  image         String?
-=======
   isFulfilled  Boolean   @default(false)
   type          UserType?
   tags          String[] @default([])
   image         String?
   description   String?
->>>>>>> 0affe00c40e6b766c84487ef5941e04145a7d9f3
   password      String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -70,8 +63,4 @@ model Token {
 enum TokenType {
   VERIFICATION
   PASSWORD_RESET
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 0affe00c40e6b766c84487ef5941e04145a7d9f3

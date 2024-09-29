@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import { auth } from "@/auth"
-import { UserButton } from "@/components/auth/user-button";
-=======
 import {auth} from "@/auth"
 import {UserButton} from "@/components/auth/user-button";
-import {Session} from "next-auth";
 import {Card, CardContent, CardHeader} from "@/components/ui/card";
 
 interface ISession {
@@ -16,22 +11,10 @@ interface ISession {
     },
     expires: string
 }
->>>>>>> 0affe00c40e6b766c84487ef5941e04145a7d9f3
 
 const SettingsPage = async () => {
     const session = await auth();
 
-<<<<<<< HEAD
-    return (
-        <div>
-            {JSON.stringify(session)}
-            <UserButton />
-        </div>
-    )
-};
-
-export default SettingsPage;
-=======
     if (!session || !session.user) {
         return <p>Unauthorized</p>
     }
@@ -55,4 +38,3 @@ export default SettingsPage;
 };
 
 export default SettingsPage;
->>>>>>> 0affe00c40e6b766c84487ef5941e04145a7d9f3

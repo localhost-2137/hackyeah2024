@@ -5,10 +5,7 @@ import { BeatLoader } from "react-spinners";
 import { useSearchParams } from "next/navigation";
 
 import { newVerification } from "@/actions/new-verification";
-<<<<<<< HEAD
 import { CardWrapper } from "@/components/auth/card-wrapper";
-=======
->>>>>>> 0affe00c40e6b766c84487ef5941e04145a7d9f3
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 
@@ -24,11 +21,7 @@ export const NewVerificationForm = () => {
     if (success || error) return;
 
     if (!token) {
-<<<<<<< HEAD
-      setError("Missing token!");
-=======
       setError("Brak tokenu!");
->>>>>>> 0affe00c40e6b766c84487ef5941e04145a7d9f3
       return;
     }
 
@@ -38,33 +31,6 @@ export const NewVerificationForm = () => {
         setError(data.error);
       })
       .catch(() => {
-<<<<<<< HEAD
-        setError("Something went wrong!");
-      })
-  }, [token, success, error]);
-
-  useEffect(() => {
-      onSubmit();
-  }, [onSubmit]);
-
-  return (
-    <CardWrapper
-      headerLabel="Confirming your verification"
-      backButtonLabel="Back to login"
-      backButtonHref="/auth/login"
-    >
-      <div className="flex items-center w-full justify-center">
-        {!success && !error && (
-          <BeatLoader />
-        )}
-        <FormSuccess message={success} />
-        {!success && (
-          <FormError message={error} />
-        )}
-      </div>
-    </CardWrapper>
-  )
-=======
         setError("Coś poszło nie tak! Spróbuj ponownie");
       });
   }, [token, success, error]);
@@ -91,5 +57,4 @@ const Loader = () => {
       <BeatLoader />
     </div>
   );
->>>>>>> 0affe00c40e6b766c84487ef5941e04145a7d9f3
 }
