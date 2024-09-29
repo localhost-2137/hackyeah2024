@@ -27,6 +27,7 @@ export const Social = () => {
       >
         <FcGoogle className="h-5 w-5" />
       </Button>
+<<<<<<< HEAD
       <Button
         size="lg"
         className="w-full"
@@ -35,6 +36,8 @@ export const Social = () => {
       >
         <FaGithub className="h-5 w-5" />
       </Button>
+=======
+>>>>>>> 0affe00c40e6b766c84487ef5941e04145a7d9f3
     </div>
   );
 };

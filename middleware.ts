@@ -10,7 +10,11 @@ import {
 
 const { auth } = NextAuth(authConfig);
 
+<<<<<<< HEAD
 export default auth((req): any => {
+=======
+export default auth(async (req): Promise<any> => {
+>>>>>>> 0affe00c40e6b766c84487ef5941e04145a7d9f3
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
 
@@ -24,7 +28,11 @@ export default auth((req): any => {
 
   if (isAuthRoute) {
     if (isLoggedIn) {
+<<<<<<< HEAD
       return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
+=======
+      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+>>>>>>> 0affe00c40e6b766c84487ef5941e04145a7d9f3
     }
     return null;
   }
@@ -37,6 +45,7 @@ export default auth((req): any => {
 
     const encodedCallbackUrl = encodeURIComponent(callbackUrl);
 
+<<<<<<< HEAD
     return Response.redirect(new URL(
       `/auth/login?callbackUrl=${encodedCallbackUrl}`,
       nextUrl
@@ -50,3 +59,16 @@ export default auth((req): any => {
 export const config = {
   matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
 }
+=======
+    return Response.redirect(
+      new URL(`/auth/login?callbackUrl=${encodedCallbackUrl}`, nextUrl)
+    );
+  }
+
+  return null;
+});
+
+export const config = {
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+};
+>>>>>>> 0affe00c40e6b766c84487ef5941e04145a7d9f3

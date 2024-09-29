@@ -26,7 +26,11 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+<<<<<<< HEAD
 .env*.local
+=======
+.env
+>>>>>>> 0affe00c40e6b766c84487ef5941e04145a7d9f3
 .env
 
 # vercel
@@ -35,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+<<<<<<< HEAD
+=======
+
+#IDE:
+.idea/
+>>>>>>> 0affe00c40e6b766c84487ef5941e04145a7d9f3
