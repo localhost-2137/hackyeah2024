@@ -1,22 +1,31 @@
 "use server";
 
-import { db } from "@/lib/db";
+import {db} from "@/lib/db";
 import {ElasticIndexes, elasticSearch} from "@/lib/elasticSearch";
 
 export async function search(searchValue: string, take: number, skip: number) {
     const searchResults = await elasticSearch.search({
         index: ElasticIndexes.UserIndex,
         query: {
-            match: {
-                name: searchValue,
-                tags: searchValue,
-            },
-            more_like_this: {
-                fields: ["name", "description", "tags"],
-                like: searchValue,
-                min_term_freq: 1,
-                min_doc_freq: 1,
-            },
+            bool: {
+                should: [
+                    {
+                        multi_match: {
+                            query: searchValue,
+                            fields: ["name", "tags"]
+                            //  tags: searchValue,
+                        },
+                    }, {
+                        more_like_this: {
+                            fields: ["name", "description", "tags"],
+                            like: searchValue,
+                            min_term_freq: 1,
+                            min_doc_freq: 1,
+                        },
+                    }
+                ]
+
+            }
         },
     });
 
