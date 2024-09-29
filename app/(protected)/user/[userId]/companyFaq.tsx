@@ -1,3 +1,5 @@
+"use client"
+
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
 import {IFaq} from "@/app/(protected)/user/[userId]/page";
 import {Suspense} from "react";
@@ -5,7 +7,7 @@ import animationData from '@/public/ai-generating.json';
 import {LottieAnimation} from "@/components/lottie-animation";
 import {FaqAnswer} from "@/components/application/faq-answer";
 
-export default async function CompanyFaq({faqQuestions}: Readonly<{ faqQuestions: IFaq[] }>) {
+export default function CompanyFaq({faqQuestions}: Readonly<{ faqQuestions: IFaq[] }>) {
     return (
         <div className="flex flex-col gap-4">
             <span>
@@ -28,7 +30,7 @@ export default async function CompanyFaq({faqQuestions}: Readonly<{ faqQuestions
                                                 <p>AI generating...</p>
                                             </div>
                                         )}>
-                                            {FaqAnswer({questionId: faqQuestion.id})}
+                                            <FaqAnswer questionId={faqQuestion.id} />
                                         </Suspense>
                                 </AccordionContent>
                             </AccordionItem>
